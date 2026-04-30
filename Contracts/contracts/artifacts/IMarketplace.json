@@ -1,0 +1,213 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"approvedBuyer(uint256)": "4a0f2887",
+			"escrowCancelReservedListing(uint256)": "6b675cb4",
+			"escrowMarkAsSold(uint256)": "4904ff8e",
+			"escrowMarkCompleted(uint256)": "cdda6c65",
+			"escrowMarkReserved(uint256)": "c8319685",
+			"escrowReserveListing(uint256,address)": "8a9bc5da",
+			"getListing(uint256)": "107a274a"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "listingId",
+					"type": "uint256"
+				}
+			],
+			"name": "approvedBuyer",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "listingId",
+					"type": "uint256"
+				}
+			],
+			"name": "escrowCancelReservedListing",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "listingId",
+					"type": "uint256"
+				}
+			],
+			"name": "escrowMarkAsSold",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "listingId",
+					"type": "uint256"
+				}
+			],
+			"name": "escrowMarkCompleted",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "listingId",
+					"type": "uint256"
+				}
+			],
+			"name": "escrowMarkReserved",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "listingId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				}
+			],
+			"name": "escrowReserveListing",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "listingId",
+					"type": "uint256"
+				}
+			],
+			"name": "getListing",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "id",
+							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "seller",
+							"type": "address"
+						},
+						{
+							"internalType": "address",
+							"name": "buyer",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "price",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "metadataURI",
+							"type": "string"
+						},
+						{
+							"internalType": "enum IMarketplace.ListingType",
+							"name": "listingType",
+							"type": "uint8"
+						},
+						{
+							"internalType": "enum IMarketplace.ListingStatus",
+							"name": "status",
+							"type": "uint8"
+						},
+						{
+							"internalType": "bool",
+							"name": "exists",
+							"type": "bool"
+						}
+					],
+					"internalType": "struct IMarketplace.Listing",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		}
+	]
+}
