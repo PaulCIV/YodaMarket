@@ -1,214 +1,249 @@
-Yoda Market
+# YodaMarket
 
-This is a full-stack Dapp built on the Ethereum Sepolia testnet. 
-Yoda Market lets users create item-sale listings or task-based bounties, request participation, approve counterparties, lock ERC-20 payments in escrow, and build wallet-based reputation through reviews.
+![Solidity](https://img.shields.io/badge/Solidity-Smart%20Contracts-363636)
+![Ethereum](https://img.shields.io/badge/Ethereum-Sepolia-627EEA)
+![React](https://img.shields.io/badge/React-Frontend-61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-339933)
+![Express](https://img.shields.io/badge/Express-API-000000)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57)
+![Web3](https://img.shields.io/badge/Web3-dApp-orange)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-Overview
+A full-stack decentralized marketplace built on Ethereum Sepolia. YodaMarket allows users to create sale listings or task-based bounties, request participation, approve counterparties, lock ERC-20 payments in escrow, and build wallet-based reputation through reviews.
 
-Yoda Market is a Web3 marketplace designed around secure peer-to-peer transactions for gaming-related digital services, items, achievements, boosting, and task completion.
+# Overview
 
-The application supports two transaction flows:
+Yoda Market is a Web3 marketplace designed around secure peer-to-peer transactions for gaming-related digital services, digital items, achievements, boosting, and task completion.
 
-* Item Sales — sellers list a digital item or service, approve a buyer, and receive payment after delivery is confirmed.
-* Bounties — creators post a task with a YODA token reward, approve a worker, and release payment after the work is submitted and accepted.
+The application supports two transaction methods:
 
-The project combines on-chain smart contracts for payment security with an off-chain backend for user profiles and reviews.
+- **Item Sales** — sellers list an item or service, approve a buyer, and receive payment after delivery is confirmed.
+- **Bounties** — creators post a task with a YODA token reward, approve a worker, and release payment after submitted work is accepted.
 
-Key Features
+The project combines on-chain smart contracts for payment security with an off-chain backend for user profiles and reviews. The goal was to model a decentralized marketplace where wallets provide identity, escrow reduces fraud risk, and reputation helps users evaluate counterparties before transacting.
 
-* Wallet-based authentication through MetaMask
-* Ethereum Sepolia testnet deployment
-* ERC-20 YODA token used as marketplace currency
-* Marketplace contract for listing creation, requester tracking, and approval logic
-* Escrow contract for locked payments, submission, rejection, release, and refund flows
-* Item-sale and bounty transaction models
-* Seller/creator approval system instead of first-come-first-served purchasing
-* One-time rejection flow with required rejection reason
-* Platform fee support through escrow payout logic
-* Off-chain profile and review system using Express and SQLite
-* Review duplication prevention and self-review prevention
-* Next.js frontend with marketplace, dashboard, and profile pages
+# Features
 
-Tech Stack
+## Wallet-Based Identity
 
-Frontend
+- MetaMask wallet connection
+- Wallet-based user identity
+- Sepolia testnet support
+- Automatic profile creation on first load
+- Profile customization through backend API
 
-* Next.js
-* React
-* TypeScript
-* Ethers.js
-* Tailwind CSS
-* MetaMask wallet integration
+## Marketplace Listings
 
-Smart Contracts
+- Create item-sale listings
+- Create bounty listings
+- Browse active listings
+- Request item purchases
+- Apply for bounties
+- View listing status and participants
+- Approve one requester per listing
 
-* Solidity
-* Hardhat
-* Ethereum Sepolia testnet
-* ERC-20 token contract
-* Marketplace contract
-* Escrow contract
+## Escrow System
 
-Backend
+- ERC-20 YODA token escrow
+- Buyer-funded item-sale transactions
+- Creator-funded bounty rewards
+- Smart-contract-controlled payment release
+- Refund handling
+- One-time rejection flow with required rejection reason
 
-* Node.js
-* Express
-* TypeScript
-* SQLite
-* better-sqlite3
+## Reputation System
 
-Architecture
+- Wallet-based user profiles
+- Ratings and written reviews
+- Duplicate review prevention
+- Self-review prevention
+- Off-chain review storage using SQLite
 
-Yoda Market uses a hybrid Web3 architecture.
+## Dashboard
 
-User / MetaMask
-      |
-      v
-Next.js Frontend
-      |
-      |---- Ethers.js ----> Marketplace Contract
-      |---- Ethers.js ----> Escrow Contract
-      |---- Ethers.js ----> YODA ERC-20 Token
-      |
-      |---- REST API ----> Express Backend
-                            |
-                            v
-                         SQLite DB
+- Create listings
+- Approve requesters
+- Fund escrow
+- Submit work or delivery
+- Confirm completed work
+- Reject submitted work once
+- Leave reviews
+- Manage profile information
 
-The blockchain layer handles listing state, approvals, escrow funding, submission, confirmation, refunds, and payout logic. The backend handles user profile data and reputation because this information does not need to be stored on-chain.
+# Technology Stack
 
-Transaction Flow
+## Frontend
 
-Item Sale
+- React
+- JavaScript
+- Ethers.js
+- MetaMask integration
+- Vercel deployment
 
-1. Seller creates an item listing.
-2. Buyers request the listing.
-3. Seller approves one requester.
-4. Approved buyer approves YODA token spending.
-5. Buyer funds escrow.
-6. Seller submits delivery.
-7. Buyer confirms or rejects delivery.
-8. On confirmation, escrow releases payment to the seller.
+## Smart Contracts
 
-Bounty
+- Solidity
+- Hardhat
+- Ethereum Sepolia testnet
+- ERC-20 token contract
+- Marketplace contract
+- Escrow contract
 
-1. Creator posts a bounty with a reward amount.
-2. Workers apply for the bounty.
-3. Creator approves one worker.
-4. Creator approves YODA token spending for the reward.
-5. Approved worker activates escrow.
-6. Worker submits completed work.
-7. Creator confirms or rejects the submission.
-8. On confirmation, escrow releases payment to the worker.
+## Backend
 
-Smart Contract Design
+- Node.js
+- Express
+- SQLite
+- REST-style API architecture
 
-Marketplace Contract
+## Development
 
-The marketplace contract manages:
+- Git
+- Smart contract deployment scripts
+- Environment-based contract configuration
+- Manual end-to-end testing
 
-* Listing creation
-* Listing metadata
-* Listing type: item sale or bounty
-* Listing status
-* Requester lists
-* Approved requester tracking
-* Seller-created listings
-* Buyer/worker-associated listings
+# Architecture
 
-Only the escrow contract can move listings into reserved, completed, sold, or cancelled escrow-controlled states. This prevents users from bypassing the payment flow.
+Yoda Market uses a hybrid Web3 architecture. Smart contracts handle payment-critical marketplace logic, while the backend stores non-critical profile and review data.
 
-Escrow Contract
+                    React Frontend
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+          ▼                ▼                ▼
+   Marketplace Contract  Escrow Contract  YODA Token
+          │                │                │
+          └────────────┬───┴────────────────┘
+                       │
+                 Ethereum Sepolia
+                       
+                    React Frontend
+                           │
+                           ▼
+                    Express Backend
+                           │
+                           ▼
+                      SQLite Database
 
-The escrow contract manages:
+      • Profiles
+      • Reviews
+      • Wallet metadata
 
-* ERC-20 token transfer into escrow
-* Item-sale payment locking
-* Bounty reward locking
-* Work submission
-* One-time rejection
-* Payment release
-* Refunds
-* Platform fees
+The blockchain layer manages listing state, approvals, escrow funding, submission, confirmation, rejection, refunds, and payout logic. The backend manages user-facing identity and reputation data that does not need to be stored on-chain.
 
-The escrow contract uses different payout logic depending on the listing type. For item sales, the seller receives payment. For bounties, the worker receives payment.
+# Transaction Flows
 
-Backend Design
+## Item Sale Flow
 
-The backend provides REST APIs for off-chain identity and reputation.
+Seller creates listing
+        │
+Buyers request listing
+        │
+Seller approves one buyer
+        │
+Buyer approves YODA spending
+        │
+Buyer funds escrow
+        │
+Seller submits delivery
+        │
+Buyer confirms or rejects
+        │
+Escrow releases payment or returns to reserved state
 
-Profiles
+## Bounty Flow
 
-* Profiles are tied to wallet addresses.
-* A profile is automatically created when a wallet is first loaded.
-* Users can update their display name and description.
+Creator posts bounty
+        │
+Workers apply
+        │
+Creator approves one worker
+        │
+Creator approves YODA spending
+        │
+Escrow locks bounty reward
+        │
+Worker submits completed work
+        │
+Creator confirms or rejects
+        │
+Escrow releases payment or returns to reserved state
 
-Reviews
+# Smart Contract Design
 
-* Users can leave ratings and comments for completed interactions.
-* Users cannot review themselves.
-* Duplicate reviews for the same listing interaction are blocked.
+## Marketplace Contract
 
-Pages
+- Listing creation
+- Listing metadata
+- Listing type: item sale or bounty
+- Listing status
+- Requester tracking
+- Approved requester tracking
+- Seller-created listings
+- Buyer and worker-associated listings
 
-Marketplace
+Only the escrow contract can move listings through escrow-controlled status transitions. This prevents users from bypassing payment and completion logic.
 
-Displays public listings and lets users request items, apply for bounties, or fund approved listings.
+## Escrow Contract
 
-Dashboard
+- ERC-20 token transfer into escrow
+- Item-sale payment locking
+- Bounty reward locking
+- Work submission
+- One-time rejection
+- Payment release
+- Refunds
+- Platform fee handling
 
-Lets users create listings, view their own listings, approve requesters, fund escrow, submit work, reject work, confirm completion, and leave reviews.
+The escrow contract uses different funding and payout logic depending on whether the listing is an item sale or bounty.
 
-Profile
+# Security and Trust Design
 
-Shows wallet-based identity, reputation score, received reviews, and user activity statistics.
+- Funds are locked before delivery.
+- Sellers cannot receive payment until delivery is confirmed.
+- Workers must be approved before bounty work begins.
+- Creators must approve token spending before bounty escrow is activated.
+- Only one requester can be approved per listing.
+- Submitted work can only be rejected once.
+- Reviews help users evaluate counterparties before approving transactions.
 
-Security and Trust Design
+# Performance Notes
 
-Yoda Market reduces scam risk through several mechanisms:
+- Typical transaction confirmation time was approximately 10–25 seconds.
+- Escrow operations required more gas than read-only or listing-management operations because they update multiple pieces of contract state.
+- The system prioritizes correctness, payment safety, and clear state transitions over aggressive gas optimization.
 
-* Funds are locked before delivery.
-* Sellers cannot receive payment until the buyer confirms delivery.
-* Workers must be approved before bounty work begins.
-* Bounty creators must approve token spending before escrow can be activated.
-* Only one requester can be approved for a listing.
-* Users can reject submitted work only once.
-* Reviews help users evaluate counterparties before approving transactions.
+# Challenges
 
-Performance Notes
+- Handling MetaMask connection and chain detection
+- Keeping deployed contract addresses synchronized through environment variables
+- Implementing ERC-20 allowance and approval flows
+- Designing separate escrow behavior for item sales and bounties
+- Coordinating on-chain listing state with off-chain profile and review data
+- Preventing duplicate reviews through database constraints
+- Handling transaction state changes across the frontend, backend, and blockchain
 
-During manual testing on Sepolia:
+# Future Improvements
 
-* Typical transaction confirmation time was approximately 10–25 seconds.
-* Escrow operations were more expensive than read-only or listing-management operations because they update multiple pieces of contract state.
-* The system prioritizes correctness and transaction safety over gas minimization.
+Potential future enhancements include:
 
-Challenges
+- In-app messaging
+- Dispute arbitration
+- NFT-based item ownership
+- Advanced search and filtering
+- Analytics dashboard
+- Event-based indexing instead of listing scans
+- Expanded automated smart contract tests
+- Contract security audit
+- Production deployment with persistent hosted database
 
-Some of the main implementation challenges included:
-
-* Handling MetaMask connection and chain detection
-* Keeping deployed contract addresses synchronized across frontend environment variables
-* Implementing ERC-20 allowance and approval flows
-* Designing separate escrow behavior for item sales and bounties
-* Preventing duplicate reviews
-* Coordinating on-chain transaction state with off-chain profile and review data
-
-Future Improvements
-
-* In-app messaging
-* Dispute arbitration
-* NFT-based item ownership
-* Search and filtering
-* Admin analytics dashboard
-* Event-based indexing instead of scanning listing IDs
-* Expanded automated smart contract tests
-* Production deployment with persistent hosted database
-
-AI Usage Disclosure
+# AI Usage Disclosure
 
 AI assistance was used for frontend and backend debugging. The smart contracts were written without AI-generated contract logic.
 
-Project Status
+# Project Status
 
-This project is a functional prototype deployed for demonstration and educational purposes. It is not intended for production use with real financial value without additional security review, automated test coverage, and contract auditing.
+Completed as a functional Web3 prototype demonstrating smart-contract escrow, ERC-20 payments, wallet-based identity, decentralized marketplace flows, and off-chain reputation tracking.
+
+As of currently this project is not intended for production use with real financial value without additional security review, automated testing, and contract auditing.
